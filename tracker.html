@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WINTER ARC — 90 Day Fat Loss</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #080808;
+    --card: #111111;
+    --card2: #171717;
+    --border: #292929;
+    --text: #f5f5f5;
+    --muted: #888;
+    --accent: #ff4d00;
+    --accent2: #ff7a00;
+    --green: #31d158;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.container {
+    width: min(1200px, 92%);
+    margin: auto;
+}
+
+header {
+    padding: 25px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.reset-btn {
+    border: 1px solid #333;
+    background: transparent;
+    color: #aaa;
+    padding: 9px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    border-color: var(--accent);
+    color: white;
+}
+
+.hero {
+    padding: 65px 0 45px;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 8vw, 95px);
+    line-height: .9;
+    letter-spacing: -5px;
+}
+
+.hero h1 span {
+    color: var(--accent);
+}
+
+.hero p {
+    margin-top: 20px;
+    color: var(--muted);
+    max-width: 550px;
+    line-height: 1.6;
+}
+
+/* DAYS */
+
+.day-section {
+    margin-top: 20px;
+}
+
+.section-title {
+    font-size: 13px;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.day-grid {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap: 6px;
+}
+
+.day {
+    height: 35px;
+    border-radius: 6px;
+    border: 1px solid #292929;
+    background: #111;
+    color: #777;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.day:hover {
+    border-color: var(--accent);
+    color: white;
+}
+
+.day.active {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: white;
+}
+
+.day.completed {
+    background: #16351e;
+    border-color: #267b38;
+    color: var(--green);
+}
+
+.day.active.completed {
+    background: var(--accent);
+    color: white;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1.3fr .7fr;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.card-title {
+    font-size: 13px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.day-number {
+    font-size: 38px;
+    font-weight: 900;
+}
+
+.date {
+    color: #777;
+    font-size: 13px;
+}
+
+/* HABITS */
+
+.habits {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.habit {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--card2);
+    border: 1px solid #242424;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.habit:hover {
+    border-color: #444;
+}
+
+.check {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #444;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.habit.done .check {
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.habit.done .check::after {
+    content: "✓";
+    color: #000;
+    font-weight: bold;
+}
+
+.habit.done .habit-name {
+    text-decoration: line-through;
+    color: #666;
+}
+
+.habit-info {
+    flex: 1;
+}
+
+.habit-name {
+    font-weight: bold;
+}
+
+.habit-desc {
+    font-size: 11px;
+    color: #777;
+    margin-top: 3px;
+}
+
+/* PROGRESS */
+
+.progress-container {
+    margin-top: 20px;
+}
+
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    height: 9px;
+    background: #222;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0%;
+    transition: .3s;
+}
+
+/* EXERCISE TRACKER */
+
+.exercise-section {
+    margin-top: 30px;
+}
+
+.exercise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.exercise-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 22px;
+}
+
+.exercise-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.exercise-name {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.exercise-sub {
+    color: #777;
+    font-size: 11px;
+    margin-top: 4px;
+    margin-bottom: 18px;
+}
+
+.rep-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.rep-input label {
+    display: block;
+    font-size: 10px;
+    color: #777;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.rep-input input {
+    width: 100%;
+    padding: 12px;
+    background: #0b0b0b;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+}
+
+.rep-input input:focus {
+    border-color: var(--accent);
+}
+
+.exercise-progress {
+    margin-top: 16px;
+}
+
+.exercise-progress-top {
+    display: flex;
+    justify-content: space-between;
+    color: #999;
+    font-size: 11px;
+    margin-bottom: 7px;
+}
+
+.exercise-bar {
+    width: 100%;
+    height: 8px;
+    background: #222;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.exercise-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--green);
+    transition: .3s;
+}
+
+.rep-total {
+    margin-top: 12px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+/* BODY INPUT */
+
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.input-box label {
+    display: block;
+    font-size: 11px;
+    color: #777;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 13px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #0b0b0b;
+    color: white;
+    outline: none;
+}
+
+.input-box input:focus {
+    border-color: var(--accent);
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.stat-label {
+    color: #777;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 900;
+    margin-top: 7px;
+}
+
+/* OVERVIEW */
+
+.overview {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.phase {
+    padding: 25px;
+    border-radius: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+}
+
+.phase-number {
+    color: var(--accent);
+    font-weight: 900;
+    font-size: 12px;
+}
+
+.phase h3 {
+    margin: 12px 0;
+}
+
+.phase p {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* MOBILE */
+
+@media(max-width: 900px) {
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .exercise-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 600px) {
+
+    .day-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .input-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        letter-spacing: -3px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="container nav">
+
+        <div class="logo">
+            WINTER<span>ARC</span>
+        </div>
+
+        <button class="reset-btn" onclick="resetAll()">
+            Reset
+        </button>
+
+    </div>
+</header>
+
+
+<main class="container">
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="eyebrow">
+        90 DAY FAT LOSS CHALLENGE
+    </div>
+
+    <h1>
+        BECOME<br>
+        <span>LEANER.</span>
+    </h1>
+
+    <p>
+        90 days. One mission. Build discipline,
+        lose body fat, get stronger and become
+        the version of yourself you wanted.
+    </p>
+
+</section>
+
+
+<!-- DAY SELECTOR -->
+
+<section class="day-section">
+
+    <div class="section-title">
+        Your 90 Days
+    </div>
+
+    <div class="day-grid" id="dayGrid"></div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section class="dashboard">
+
+<!-- DAILY HABITS -->
+
+<div class="card">
+
+    <div class="day-header">
+
+        <div>
+
+            <div class="card-title">
+                Daily Mission
+            </div>
+
+            <div class="day-number" id="dayTitle">
+                DAY 1
+            </div>
+
+        </div>
+
+        <div class="date" id="dateDisplay">
+            —
+        </div>
+
+    </div>
+
+
+    <div class="habits">
+
+        <div class="habit" data-habit="workout">
+            <div class="check"></div>
+
+            <div class="habit-info">
+                <div class="habit-name">Workout</div>
+                <div class="habit-desc">
+                    45–60 minutes training
+                </div>
+            </div>
+        </div>
+
+
+        <div class="habit" data-habit="steps">
+            <div class="check"></div>
+
+            <div class="habit-info">
+                <div class="habit-name">Steps</div>
+                <div class="habit-desc">
+                    8,000–10,000 steps
+                </div>
+            </div>
+        </div>
+
+
+        <div class="habit" data-habit="protein">
+            <div class="check"></div>
+
+            <div class="habit-info">
+                <div class="habit-name">Protein</div>
+                <div class="habit-desc">
+                    Hit your daily protein target
+                </div>
+            </div>
+        </div>
+
+
+        <div class="habit" data-habit="calories">
+            <div class="check"></div>
+
+            <div class="habit-info">
+                <div class="habit-name">Calories</div>
+                <div class="habit-desc">
+                    Stay around your calorie target
+                </div>
+            </div>
+        </div>
+
+
+        <div class="habit" data-habit="water">
+            <div class="check"></div>
+
+            <div class="habit-info">
+                <div class="habit-name">Water</div>
+                <div class="habit-desc">
+                    2–3 litres
+                </div>
+            </div>
+        </div>
+
+
+        <div class="habit" data-habit="sleep">
+            <div class="check"></div>
+
+            <div class="habit-info">
+                <div class="habit-name">Sleep</div>
+                <div class="habit-desc">
+                    7–9 hours
+                </div>
+            </div>
+        </div>
+
+
+        <div class="habit" data-habit="sugar">
+            <div class="check"></div>
+
+            <div class="habit-info">
+                <div class="habit-name">
+                    No Sugary Drinks
+                </div>
+
+                <div class="habit-desc">
+                    Avoid unnecessary liquid calories
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="progress-container">
+
+        <div class="progress-top">
+            <span>Daily Completion</span>
+            <strong id="dailyPercent">0%</strong>
+        </div>
+
+        <div class="progress-bar">
+            <div
+                class="progress-fill"
+                id="dailyProgress">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- BODY -->
+
+<div class="card">
+
+    <div class="card-title">
+        Body Progress
+    </div>
+
+    <div class="input-grid">
+
+        <div class="input-box">
+            <label>Weight KG</label>
+            <input
+                type="number"
+                step="0.1"
+                id="weight"
+                placeholder="78.5">
+        </div>
+
+        <div class="input-box">
+            <label>Waist CM</label>
+            <input
+                type="number"
+                step="0.1"
+                id="waist"
+                placeholder="85">
+        </div>
+
+        <div class="input-box">
+            <label>Steps</label>
+            <input
+                type="number"
+                id="stepsInput"
+                placeholder="8500">
+        </div>
+
+        <div class="input-box">
+            <label>Water L</label>
+            <input
+                type="number"
+                step="0.1"
+                id="waterInput"
+                placeholder="2.5">
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- EXERCISE TRACKER -->
+
+<section class="exercise-section">
+
+    <div class="section-title">
+        Daily Rep Tracker
+    </div>
+
+    <div class="exercise-grid">
+
+
+        <!-- SQUATS -->
+
+        <div class="exercise-card">
+
+            <div class="exercise-icon">🦵</div>
+
+            <div class="exercise-name">
+                Squats
+            </div>
+
+            <div class="exercise-sub">
+                Lower body
+            </div>
+
+            <div class="rep-inputs">
+
+                <div class="rep-input">
+                    <label>Daily Target</label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        id="squatTarget"
+                        placeholder="50">
+                </div>
+
+                <div class="rep-input">
+                    <label>Completed</label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        id="squatCompleted"
+                        placeholder="0">
+                </div>
+
+            </div>
+
+
+            <div class="exercise-progress">
+
+                <div class="exercise-progress-top">
+
+                    <span>Progress</span>
+
+                    <span id="squatPercent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="exercise-bar">
+
+                    <div
+                        class="exercise-fill"
+                        id="squatProgress">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="rep-total">
+                <span id="squatText">
+                    0 / 0 reps
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- PUSH UPS -->
+
+        <div class="exercise-card">
+
+            <div class="exercise-icon">💪</div>
+
+            <div class="exercise-name">
+                Push-ups
+            </div>
+
+            <div class="exercise-sub">
+                Upper body
+            </div>
+
+            <div class="rep-inputs">
+
+                <div class="rep-input">
+                    <label>Daily Target</label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        id="pushTarget"
+                        placeholder="40">
+                </div>
+
+                <div class="rep-input">
+                    <label>Completed</label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        id="pushCompleted"
+                        placeholder="0">
+                </div>
+
+            </div>
+
+
+            <div class="exercise-progress">
+
+                <div class="exercise-progress-top">
+
+                    <span>Progress</span>
+
+                    <span id="pushPercent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="exercise-bar">
+
+                    <div
+                        class="exercise-fill"
+                        id="pushProgress">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="rep-total">
+                <span id="pushText">
+                    0 / 0 reps
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- ABS -->
+
+        <div class="exercise-card">
+
+            <div class="exercise-icon">🔥</div>
+
+            <div class="exercise-name">
+                Abs
+            </div>
+
+            <div class="exercise-sub">
+                Core training
+            </div>
+
+            <div class="rep-inputs">
+
+                <div class="rep-input">
+                    <label>Daily Target</label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        id="absTarget"
+                        placeholder="30">
+                </div>
+
+                <div class="rep-input">
+                    <label>Completed</label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        id="absCompleted"
+                        placeholder="0">
+                </div>
+
+            </div>
+
+
+            <div class="exercise-progress">
+
+                <div class="exercise-progress-top">
+
+                    <span>Progress</span>
+
+                    <span id="absPercent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="exercise-bar">
+
+                    <div
+                        class="exercise-fill"
+                        id="absProgress">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="rep-total">
+                <span id="absText">
+                    0 / 0 reps
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Days Complete
+        </div>
+
+        <div class="stat-value" id="daysComplete">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Current Streak
+        </div>
+
+        <div class="stat-value" id="streak">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Current Weight
+        </div>
+
+        <div class="stat-value" id="currentWeight">
+            —
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            90 Day Progress
+        </div>
+
+        <div class="stat-value" id="overallProgress">
+            0%
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Total Squats
+        </div>
+
+        <div class="stat-value" id="totalSquats">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Total Push-ups
+        </div>
+
+        <div class="stat-value" id="totalPushups">
+            0
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PHASES -->
+
+<section class="overview">
+
+    <div class="section-title">
+        The 90 Day Arc
+    </div>
+
+    <div class="overview-grid">
+
+        <div class="phase">
+
+            <div class="phase-number">
+                01 — 30
+            </div>
+
+            <h3>
+                BUILD THE HABIT
+            </h3>
+
+            <p>
+                Stop relying on motivation.
+                Build your training, nutrition,
+                sleep and daily movement routine.
+            </p>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                31 — 60
+            </div>
+
+            <h3>
+                BUILD THE DISCIPLINE
+            </h3>
+
+            <p>
+                Stay consistent when motivation disappears.
+                Focus on progressive training and nutrition.
+            </p>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                61 — 90
+            </div>
+
+            <h3>
+                FINISH THE ARC
+            </h3>
+
+            <p>
+                Push consistency, track your progress
+                and finish the 90 days without quitting.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<script>
+
+/* ==========================================
+   WINTER ARC 90 DAY TRACKER
+   ========================================== */
+
+const TOTAL_DAYS = 90;
+
+let currentDay = 1;
+
+
+/* LOAD DATA */
+
+let data =
+    JSON.parse(
+        localStorage.getItem("winterArc90")
+    ) || {
+
+        startDate:
+            new Date().toISOString(),
+
+        days: {}
+
+    };
+
+
+/* CREATE DAY */
+
+function createDay(day) {
+
+    if (!data.days[day]) {
+
+        data.days[day] = {
+
+            habits: {
+
+                workout: false,
+                steps: false,
+                protein: false,
+                calories: false,
+                water: false,
+                sleep: false,
+                sugar: false
+
+            },
+
+            weight: "",
+            waist: "",
+            steps: "",
+            water: "",
+
+            exercises: {
+
+                squats: {
+                    target: 50,
+                    completed: 0
+                },
+
+                pushups: {
+                    target: 40,
+                    completed: 0
+                },
+
+                abs: {
+                    target: 30,
+                    completed: 0
+                }
+
+            }
+
+        };
+
+    }
+
+}
+
+
+/* SAVE */
+
+function save() {
+
+    localStorage.setItem(
+        "winterArc90",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* CREATE DAY BUTTONS */
+
+function createDayButtons() {
+
+    const grid =
+        document.getElementById("dayGrid");
+
+    grid.innerHTML = "";
+
+    for (
+        let i = 1;
+        i <= TOTAL_DAYS;
+        i++
+    ) {
+
+        createDay(i);
+
+        const button =
+            document.createElement("button");
+
+        button.className = "day";
+
+        button.textContent = i;
+
+        button.onclick =
+            () => selectDay(i);
+
+        grid.appendChild(button);
+
+    }
+
+}
+
+
+/* SELECT DAY */
+
+function selectDay(day) {
+
+    currentDay = day;
+
+    createDay(day);
+
+    loadDay();
+
+    updateDayButtons();
+
+}
+
+
+/* DAY COMPLETE */
+
+function isDayComplete(day) {
+
+    createDay(day);
+
+    const habits =
+        data.days[day].habits;
+
+    const habitsComplete =
+        Object.values(habits)
+        .every(Boolean);
+
+
+    const exercises =
+        data.days[day].exercises;
+
+
+    const exercisesComplete =
+        exercises.squats.completed >=
+            exercises.squats.target &&
+
+        exercises.pushups.completed >=
+            exercises.pushups.target &&
+
+        exercises.abs.completed >=
+            exercises.abs.target;
+
+
+    return habitsComplete &&
+           exercisesComplete;
+
+}
+
+
+/* UPDATE DAY BUTTONS */
+
+function updateDayButtons() {
+
+    document
+        .querySelectorAll(".day")
+        .forEach(
+            (button, index) => {
+
+                const day =
+                    index + 1;
+
+                button.classList.remove(
+                    "active",
+                    "completed"
+                );
+
+                if (
+                    day === currentDay
+                ) {
+
+                    button.classList.add(
+                        "active"
+                    );
+
+                }
+
+                if (
+                    isDayComplete(day)
+                ) {
+
+                    button.classList.add(
+                        "completed"
+                    );
+
+                }
+
+            }
+        );
+
+}
+
+
+/* LOAD DAY */
+
+function loadDay() {
+
+    createDay(currentDay);
+
+    const day =
+        data.days[currentDay];
+
+
+    document.getElementById(
+        "dayTitle"
+    ).textContent =
+        "DAY " + currentDay;
+
+
+    const start =
+        new Date(data.startDate);
+
+    const date =
+        new Date(start);
+
+    date.setDate(
+        start.getDate()
+        + currentDay
+        - 1
+    );
+
+
+    document.getElementById(
+        "dateDisplay"
+    ).textContent =
+        date.toLocaleDateString(
+            "en-IN",
+            {
+                day: "numeric",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+
+    /* HABITS */
+
+    document
+        .querySelectorAll(".habit")
+        .forEach(habit => {
+
+            const name =
+                habit.dataset.habit;
+
+            habit.classList.toggle(
+                "done",
+                day.habits[name]
+            );
+
+        });
+
+
+    /* BODY */
+
+    document.getElementById(
+        "weight"
+    ).value = day.weight;
+
+    document.getElementById(
+        "waist"
+    ).value = day.waist;
+
+    document.getElementById(
+        "stepsInput"
+    ).value = day.steps;
+
+    document.getElementById(
+        "waterInput"
+    ).value = day.water;
+
+
+    /* EXERCISES */
+
+    document.getElementById(
+        "squatTarget"
+    ).value =
+        day.exercises.squats.target;
+
+    document.getElementById(
+        "squatCompleted"
+    ).value =
+        day.exercises.squats.completed;
+
+
+    document.getElementById(
+        "pushTarget"
+    ).value =
+        day.exercises.pushups.target;
+
+    document.getElementById(
+        "pushCompleted"
+    ).value =
+        day.exercises.pushups.completed;
+
+
+    document.getElementById(
+        "absTarget"
+    ).value =
+        day.exercises.abs.target;
+
+    document.getElementById(
+        "absCompleted"
+    ).value =
+        day.exercises.abs.completed;
+
+
+    updateDailyProgress();
+
+    updateExerciseProgress();
+
+}
+
+
+/* HABIT CLICK */
+
+document
+    .querySelectorAll(".habit")
+    .forEach(habit => {
+
+        habit.addEventListener(
+            "click",
+            () => {
+
+                const name =
+                    habit.dataset.habit;
+
+                data.days[currentDay]
+                    .habits[name] =
+                    !data.days[currentDay]
+                        .habits[name];
+
+                save();
+
+                loadDay();
+
+                updateStats();
+
+            }
+        );
+
+    });
+
+
+/* DAILY PROGRESS */
+
+function updateDailyProgress() {
+
+    const day =
+        data.days[currentDay];
+
+    const habits =
+        day.habits;
+
+    const totalHabits =
+        Object.keys(habits).length;
+
+    const completedHabits =
+        Object.values(habits)
+        .filter(Boolean).length;
+
+
+    const exercises =
+        day.exercises;
+
+
+    let exerciseScore = 0;
+
+    if (
+        exercises.squats.target > 0
+    ) {
+
+        exerciseScore += Math.min(
+            exercises.squats.completed /
+            exercises.squats.target,
+            1
+        );
+
+    }
+
+
+    if (
+        exercises.pushups.target > 0
+    ) {
+
+        exerciseScore += Math.min(
+            exercises.pushups.completed /
+            exercises.pushups.target,
+            1
+        );
+
+    }
+
+
+    if (
+        exercises.abs.target > 0
+    ) {
+
+        exerciseScore += Math.min(
+            exercises.abs.completed /
+            exercises.abs.target,
+            1
+        );
+
+    }
+
+
+    const totalItems =
+        totalHabits + 3;
+
+
+    const completedItems =
+        completedHabits +
+        exerciseScore;
+
+
+    const percent =
+        Math.round(
+            completedItems /
+            totalItems *
+            100
+        );
+
+
+    document.getElementById(
+        "dailyPercent"
+    ).textContent =
+        percent + "%";
+
+
+    document.getElementById(
+        "dailyProgress"
+    ).style.width =
+        percent + "%";
+
+}
+
+
+/* EXERCISE PROGRESS */
+
+function updateExerciseProgress() {
+
+    const exercises =
+        data.days[currentDay]
+            .exercises;
+
+
+    updateOneExercise(
+        exercises.squats,
+        "squat"
+    );
+
+    updateOneExercise(
+        exercises.pushups,
+        "push"
+    );
+
+    updateOneExercise(
+        exercises.abs,
+        "abs"
+    );
+
+}
+
+
+function updateOneExercise(
+    exercise,
+    prefix
+) {
+
+    let percent = 0;
+
+    if (
+        exercise.target > 0
+    ) {
+
+        percent =
+            Math.min(
+                Math.round(
+                    exercise.completed /
+                    exercise.target *
+                    100
+                ),
+                100
+            );
+
+    }
+
+
+    document.getElementById(
+        prefix + "Percent"
+    ).textContent =
+        percent + "%";
+
+
+    document.getElementById(
+        prefix + "Progress"
+    ).style.width =
+        percent + "%";
+
+
+    document.getElementById(
+        prefix + "Text"
+    ).textContent =
+        exercise.completed +
+        " / " +
+        exercise.target +
+        " reps";
+
+}
+
+
+/* EXERCISE INPUTS */
+
+const exerciseInputs = {
+
+    squatTarget: [
+        "squats",
+        "target"
+    ],
+
+    squatCompleted: [
+        "squats",
+        "completed"
+    ],
+
+    pushTarget: [
+        "pushups",
+        "target"
+    ],
+
+    pushCompleted: [
+        "pushups",
+        "completed"
+    ],
+
+    absTarget: [
+        "abs",
+        "target"
+    ],
+
+    absCompleted: [
+        "abs",
+        "completed"
+    ]
+
+};
+
+
+Object.keys(exerciseInputs)
+    .forEach(id => {
+
+        document
+            .getElementById(id)
+            .addEventListener(
+                "input",
+                function() {
+
+                    const [
+                        exercise,
+                        property
+                    ] =
+                        exerciseInputs[id];
+
+
+                    let value =
+                        parseInt(
+                            this.value
+                        ) || 0;
+
+
+                    if (value < 0)
+                        value = 0;
+
+
+                    data.days[currentDay]
+                        .exercises[exercise]
+                        [property] =
+                        value;
+
+
+                    save();
+
+                    updateExerciseProgress();
+
+                    updateDailyProgress();
+
+                    updateStats();
+
+                    updateDayButtons();
+
+                }
+            );
+
+    });
+
+
+/* BODY INPUTS */
+
+const bodyInputs = {
+
+    weight: "weight",
+    waist: "waist",
+    stepsInput: "steps",
+    waterInput: "water"
+
+};
+
+
+Object.keys(bodyInputs)
+    .forEach(id => {
+
+        document
+            .getElementById(id)
+            .addEventListener(
+                "input",
+                function() {
+
+                    data.days[currentDay]
+                        [bodyInputs[id]] =
+                        this.value;
+
+                    save();
+
+                    updateStats();
+
+                }
+            );
+
+    });
+
+
+/* OVERALL STATS */
+
+function updateStats() {
+
+    let completedDays = 0;
+
+    let lastWeight = "";
+
+    let totalSquats = 0;
+
+    let totalPushups = 0;
+
+    let totalAbs = 0;
+
+
+    for (
+        let i = 1;
+        i <= TOTAL_DAYS;
+        i++
+    ) {
+
+        createDay(i);
+
+        const day =
+            data.days[i];
+
+
+        if (
+            isDayComplete(i)
+        ) {
+
+            completedDays++;
+
+        }
+
+
+        if (
+            day.weight !== ""
+        ) {
+
+            lastWeight =
+                day.weight;
+
+        }
+
+
+        totalSquats +=
+            Number(
+                day.exercises
+                    .squats.completed
+            ) || 0;
+
+
+        totalPushups +=
+            Number(
+                day.exercises
+                    .pushups.completed
+            ) || 0;
+
+
+        totalAbs +=
+            Number(
+                day.exercises
+                    .abs.completed
+            ) || 0;
+
+    }
+
+
+    document.getElementById(
+        "daysComplete"
+    ).textContent =
+        completedDays;
+
+
+    document.getElementById(
+        "overallProgress"
+    ).textContent =
+        Math.round(
+            completedDays /
+            TOTAL_DAYS *
+            100
+        ) + "%";
+
+
+    document.getElementById(
+        "currentWeight"
+    ).textContent =
+        lastWeight
+            ? lastWeight + " kg"
+            : "—";
+
+
+    document.getElementById(
+        "totalSquats"
+    ).textContent =
+        totalSquats.toLocaleString();
+
+
+    document.getElementById(
+        "totalPushups"
+    ).textContent =
+        totalPushups.toLocaleString();
+
+
+    calculateStreak();
+
+    updateDayButtons();
+
+}
+
+
+/* STREAK */
+
+function calculateStreak() {
+
+    let streak = 0;
+
+
+    for (
+        let i = currentDay;
+        i >= 1;
+        i--
+    ) {
+
+        if (
+            isDayComplete(i)
+        ) {
+
+            streak++;
+
+        } else {
+
+            break;
+
+        }
+
+    }
+
+
+    document.getElementById(
+        "streak"
+    ).textContent =
+        streak;
+
+}
+
+
+/* RESET */
+
+function resetAll() {
+
+    const confirmed =
+        confirm(
+            "Delete ALL your 90-day Winter Arc progress?"
+        );
+
+
+    if (!confirmed)
+        return;
+
+
+    localStorage.removeItem(
+        "winterArc90"
+    );
+
+
+    location.reload();
+
+}
+
+
+/* START */
+
+createDayButtons();
+
+createDay(1);
+
+loadDay();
+
+updateStats();
+
+</script>
+
+</body>
+</html>
