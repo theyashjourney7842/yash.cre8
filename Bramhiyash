@@ -1,0 +1,3287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BRAMHI YASH WINTER ARC — 90 Day Tracker</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#080808;
+    --card:#111;
+    --card2:#171717;
+    --border:#292929;
+    --text:#f5f5f5;
+    --muted:#888;
+    --orange:#ff4d00;
+    --orange2:#ff7a00;
+    --green:#31d158;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+.container{
+    width:min(1200px,92%);
+    margin:auto;
+}
+
+/* HEADER */
+
+header{
+    padding:24px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:var(--orange);
+}
+
+.reset{
+    padding:9px 15px;
+    background:transparent;
+    border:1px solid #333;
+    color:#aaa;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.reset:hover{
+    border-color:var(--orange);
+    color:white;
+}
+
+/* HERO */
+
+.hero{
+    padding:65px 0 45px;
+}
+
+.eyebrow{
+    color:var(--orange);
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:3px;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:clamp(50px,8vw,95px);
+    line-height:.9;
+    letter-spacing:-5px;
+}
+
+.hero h1 span{
+    color:var(--orange);
+}
+
+.hero p{
+    margin-top:20px;
+    max-width:600px;
+    color:var(--muted);
+    line-height:1.6;
+}
+
+/* PERSON SWITCHER */
+
+.person-switcher{
+    display:flex;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.person-btn{
+    padding:12px 22px;
+    border:1px solid #333;
+    background:#111;
+    color:#777;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.person-btn.active{
+    background:var(--orange);
+    border-color:var(--orange);
+    color:white;
+}
+
+/* SECTION */
+
+.section-title{
+    color:#999;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:14px;
+}
+
+/* DAY SELECTOR */
+
+.day-grid{
+    display:grid;
+    grid-template-columns:repeat(15,1fr);
+    gap:6px;
+}
+
+.day{
+    height:35px;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:6px;
+    color:#777;
+    cursor:pointer;
+}
+
+.day:hover{
+    border-color:var(--orange);
+    color:white;
+}
+
+.day.active{
+    background:var(--orange);
+    border-color:var(--orange);
+    color:white;
+}
+
+.day.completed{
+    background:#16351e;
+    border-color:#267b38;
+    color:var(--green);
+}
+
+.day.active.completed{
+    background:var(--orange);
+    color:white;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:20px;
+    margin-top:30px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:25px;
+}
+
+.card-title{
+    color:#999;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.day-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.day-number{
+    font-size:38px;
+    font-weight:900;
+}
+
+.date{
+    color:#777;
+    font-size:13px;
+}
+
+/* HABITS */
+
+.habits{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.habit{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px;
+    background:var(--card2);
+    border:1px solid #242424;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.check{
+    width:22px;
+    height:22px;
+    border:2px solid #444;
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.habit.done .check{
+    background:var(--green);
+    border-color:var(--green);
+}
+
+.habit.done .check:after{
+    content:"✓";
+    color:#000;
+    font-weight:bold;
+}
+
+.habit.done .habit-name{
+    color:#666;
+    text-decoration:line-through;
+}
+
+.habit-info{
+    flex:1;
+}
+
+.habit-name{
+    font-weight:bold;
+}
+
+.habit-desc{
+    color:#777;
+    font-size:11px;
+    margin-top:3px;
+}
+
+/* PROGRESS */
+
+.progress{
+    margin-top:20px;
+}
+
+.progress-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+    font-size:13px;
+}
+
+.progress-bar{
+    height:9px;
+    background:#222;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0;
+    background:linear-gradient(
+        90deg,
+        var(--orange),
+        var(--orange2)
+    );
+    transition:.3s;
+}
+
+/* BODY */
+
+.input-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.input-box label{
+    display:block;
+    color:#777;
+    font-size:10px;
+    text-transform:uppercase;
+    margin-bottom:6px;
+}
+
+.input-box input{
+    width:100%;
+    padding:13px;
+    background:#0b0b0b;
+    border:1px solid #333;
+    border-radius:8px;
+    color:white;
+    outline:none;
+}
+
+.input-box input:focus{
+    border-color:var(--orange);
+}
+
+/* EXERCISES */
+
+.exercise-section{
+    margin-top:30px;
+}
+
+.exercise-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.exercise-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:22px;
+}
+
+.exercise-icon{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.exercise-name{
+    font-size:19px;
+    font-weight:900;
+}
+
+.exercise-sub{
+    color:#777;
+    font-size:11px;
+    margin:5px 0 18px;
+}
+
+.rep-inputs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.rep-input label{
+    display:block;
+    color:#777;
+    font-size:9px;
+    text-transform:uppercase;
+    margin-bottom:6px;
+}
+
+.rep-input input{
+    width:100%;
+    padding:12px;
+    background:#0b0b0b;
+    color:white;
+    border:1px solid #333;
+    border-radius:8px;
+    outline:none;
+}
+
+.rep-input input:focus{
+    border-color:var(--orange);
+}
+
+.exercise-progress{
+    margin-top:16px;
+}
+
+.exercise-progress-top{
+    display:flex;
+    justify-content:space-between;
+    color:#999;
+    font-size:11px;
+    margin-bottom:7px;
+}
+
+.exercise-bar{
+    height:8px;
+    background:#222;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.exercise-fill{
+    width:0;
+    height:100%;
+    background:var(--green);
+    transition:.3s;
+}
+
+.rep-total{
+    color:#aaa;
+    font-size:12px;
+    margin-top:12px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:20px;
+    border-radius:12px;
+}
+
+.stat-label{
+    color:#777;
+    font-size:10px;
+    text-transform:uppercase;
+}
+
+.stat-value{
+    font-size:24px;
+    font-weight:900;
+    margin-top:7px;
+}
+
+/* ==================================================
+   COMPARISON
+================================================== */
+
+.comparison-section{
+    margin-top:70px;
+    padding-bottom:50px;
+}
+
+.comparison-header{
+    margin-bottom:25px;
+}
+
+.comparison-title{
+    font-size:clamp(32px,5vw,55px);
+    font-weight:900;
+    letter-spacing:-2px;
+}
+
+.comparison-title span{
+    color:var(--orange);
+}
+
+.comparison-subtitle{
+    color:#777;
+    margin-top:8px;
+}
+
+/* NAME INPUTS */
+
+.name-inputs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.name-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px;
+}
+
+.name-box label{
+    display:block;
+    color:#777;
+    font-size:10px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.name-box input{
+    width:100%;
+    padding:13px;
+    background:#0b0b0b;
+    border:1px solid #333;
+    border-radius:8px;
+    color:white;
+    font-size:16px;
+    outline:none;
+}
+
+.name-box input:focus{
+    border-color:var(--orange);
+}
+
+/* COMPARISON TABLE */
+
+.comparison-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.comparison-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+}
+
+.comparison-cell{
+    padding:20px;
+    border-bottom:1px solid var(--border);
+    border-right:1px solid var(--border);
+    min-height:80px;
+}
+
+.comparison-cell:nth-child(3n){
+    border-right:none;
+}
+
+.comparison-label{
+    color:#777;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.comparison-value{
+    font-size:25px;
+    font-weight:900;
+    margin-top:8px;
+}
+
+.person1-header{
+    color:#ff6a00;
+    font-weight:900;
+    font-size:18px;
+}
+
+.person2-header{
+    color:#4da6ff;
+    font-weight:900;
+    font-size:18px;
+}
+
+.metric-name{
+    font-weight:bold;
+    font-size:14px;
+}
+
+/* OVERALL COMPARISON */
+
+.compare-progress{
+    margin-top:25px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.compare-progress-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+}
+
+.compare-progress-name{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.compare-progress-bar{
+    height:12px;
+    background:#222;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.compare-progress-fill{
+    height:100%;
+    background:var(--orange);
+    width:0;
+    transition:.4s;
+}
+
+.person2-fill{
+    background:#4da6ff;
+}
+
+/* PHASES */
+
+.overview{
+    margin:30px 0 60px;
+}
+
+.overview-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.phase{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:25px;
+}
+
+.phase-number{
+    color:var(--orange);
+    font-size:12px;
+    font-weight:bold;
+}
+
+.phase h3{
+    margin:12px 0;
+}
+
+.phase p{
+    color:#777;
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .exercise-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:650px){
+
+    .day-grid{
+        grid-template-columns:repeat(7,1fr);
+    }
+
+    .input-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .overview-grid{
+        grid-template-columns:1fr;
+    }
+
+    .name-inputs{
+        grid-template-columns:1fr;
+    }
+
+    .comparison-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .comparison-cell{
+        min-height:70px;
+    }
+
+    .comparison-cell:nth-child(3n){
+        border-right:1px solid var(--border);
+    }
+
+    .comparison-cell:nth-child(2n){
+        border-right:none;
+    }
+
+    .comparison-grid .metric-cell{
+        grid-column:1 / -1;
+    }
+
+    .compare-progress{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<header>
+
+<div class="container nav">
+
+    <div class="logo">
+        WINTER<span>ARC</span>
+    </div>
+
+    <button
+        class="reset"
+        onclick="resetAll()">
+        Reset
+    </button>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="eyebrow">
+        90 DAY FAT LOSS CHALLENGE
+    </div>
+
+    <h1>
+        BECOME<br>
+        <span>LEANER.</span>
+    </h1>
+
+    <p>
+        90 days. One mission.
+        Build discipline, track your body,
+        complete your workouts and finish
+        the Winter Arc.
+    </p>
+
+</section>
+
+
+<!-- PERSON SWITCH -->
+
+<div class="person-switcher">
+
+    <button
+        class="person-btn active"
+        id="person1Btn"
+        onclick="switchPerson(1)">
+        PERSON 1
+    </button>
+
+    <button
+        class="person-btn"
+        id="person2Btn"
+        onclick="switchPerson(2)">
+        PERSON 2
+    </button>
+
+</div>
+
+
+<!-- DAYS -->
+
+<section>
+
+    <div class="section-title">
+        Your 90 Days
+    </div>
+
+    <div
+        class="day-grid"
+        id="dayGrid">
+    </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section class="dashboard">
+
+
+<!-- DAILY TRACKER -->
+
+<div class="card">
+
+    <div class="day-header">
+
+        <div>
+
+            <div class="card-title">
+                Daily Mission
+            </div>
+
+            <div
+                class="day-number"
+                id="dayTitle">
+                DAY 1
+            </div>
+
+        </div>
+
+        <div
+            class="date"
+            id="dateDisplay">
+            —
+        </div>
+
+    </div>
+
+
+    <div class="habits">
+
+
+        <div
+            class="habit"
+            data-habit="workout">
+
+            <div class="check"></div>
+
+            <div class="habit-info">
+
+                <div class="habit-name">
+                    Workout
+                </div>
+
+                <div class="habit-desc">
+                    45–60 minutes training
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="habit"
+            data-habit="steps">
+
+            <div class="check"></div>
+
+            <div class="habit-info">
+
+                <div class="habit-name">
+                    Steps
+                </div>
+
+                <div class="habit-desc">
+                    8,000–10,000 steps
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="habit"
+            data-habit="protein">
+
+            <div class="check"></div>
+
+            <div class="habit-info">
+
+                <div class="habit-name">
+                    Protein
+                </div>
+
+                <div class="habit-desc">
+                    Hit your protein target
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="habit"
+            data-habit="calories">
+
+            <div class="check"></div>
+
+            <div class="habit-info">
+
+                <div class="habit-name">
+                    Calories
+                </div>
+
+                <div class="habit-desc">
+                    Stay around your calorie target
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="habit"
+            data-habit="water">
+
+            <div class="check"></div>
+
+            <div class="habit-info">
+
+                <div class="habit-name">
+                    Water
+                </div>
+
+                <div class="habit-desc">
+                    2–3 litres
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="habit"
+            data-habit="sleep">
+
+            <div class="check"></div>
+
+            <div class="habit-info">
+
+                <div class="habit-name">
+                    Sleep
+                </div>
+
+                <div class="habit-desc">
+                    7–9 hours
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="habit"
+            data-habit="sugar">
+
+            <div class="check"></div>
+
+            <div class="habit-info">
+
+                <div class="habit-name">
+                    No Sugary Drinks
+                </div>
+
+                <div class="habit-desc">
+                    Avoid unnecessary liquid calories
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="progress">
+
+        <div class="progress-top">
+
+            <span>
+                Daily Completion
+            </span>
+
+            <strong id="dailyPercent">
+                0%
+            </strong>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"
+                id="dailyProgress">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- BODY DATA -->
+
+<div class="card">
+
+    <div class="card-title">
+        Body Progress
+    </div>
+
+    <div class="input-grid">
+
+
+        <div class="input-box">
+
+            <label>
+                Weight KG
+            </label>
+
+            <input
+                id="weight"
+                type="number"
+                step="0.1"
+                placeholder="78.5">
+
+        </div>
+
+
+        <div class="input-box">
+
+            <label>
+                Waist CM
+            </label>
+
+            <input
+                id="waist"
+                type="number"
+                step="0.1"
+                placeholder="85">
+
+        </div>
+
+
+        <div class="input-box">
+
+            <label>
+                Steps
+            </label>
+
+            <input
+                id="stepsInput"
+                type="number"
+                placeholder="8500">
+
+        </div>
+
+
+        <div class="input-box">
+
+            <label>
+                Water L
+            </label>
+
+            <input
+                id="waterInput"
+                type="number"
+                step="0.1"
+                placeholder="2.5">
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- EXERCISES -->
+
+<section class="exercise-section">
+
+    <div class="section-title">
+        Daily Rep Tracker
+    </div>
+
+
+    <div class="exercise-grid">
+
+
+        <!-- SQUATS -->
+
+        <div class="exercise-card">
+
+            <div class="exercise-icon">
+                🦵
+            </div>
+
+            <div class="exercise-name">
+                Squats
+            </div>
+
+            <div class="exercise-sub">
+                Lower Body
+            </div>
+
+
+            <div class="rep-inputs">
+
+                <div class="rep-input">
+
+                    <label>
+                        Daily Target
+                    </label>
+
+                    <input
+                        id="squatTarget"
+                        type="number"
+                        min="0"
+                        placeholder="50">
+
+                </div>
+
+
+                <div class="rep-input">
+
+                    <label>
+                        Completed
+                    </label>
+
+                    <input
+                        id="squatCompleted"
+                        type="number"
+                        min="0"
+                        placeholder="0">
+
+                </div>
+
+            </div>
+
+
+            <div class="exercise-progress">
+
+                <div class="exercise-progress-top">
+
+                    <span>
+                        Progress
+                    </span>
+
+                    <span id="squatPercent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="exercise-bar">
+
+                    <div
+                        class="exercise-fill"
+                        id="squatProgress">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="rep-total"
+                id="squatText">
+                0 / 50 reps
+            </div>
+
+        </div>
+
+
+        <!-- PUSHUPS -->
+
+        <div class="exercise-card">
+
+            <div class="exercise-icon">
+                💪
+            </div>
+
+            <div class="exercise-name">
+                Push-ups
+            </div>
+
+            <div class="exercise-sub">
+                Upper Body
+            </div>
+
+
+            <div class="rep-inputs">
+
+                <div class="rep-input">
+
+                    <label>
+                        Daily Target
+                    </label>
+
+                    <input
+                        id="pushTarget"
+                        type="number"
+                        min="0"
+                        placeholder="40">
+
+                </div>
+
+
+                <div class="rep-input">
+
+                    <label>
+                        Completed
+                    </label>
+
+                    <input
+                        id="pushCompleted"
+                        type="number"
+                        min="0"
+                        placeholder="0">
+
+                </div>
+
+            </div>
+
+
+            <div class="exercise-progress">
+
+                <div class="exercise-progress-top">
+
+                    <span>
+                        Progress
+                    </span>
+
+                    <span id="pushPercent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="exercise-bar">
+
+                    <div
+                        class="exercise-fill"
+                        id="pushProgress">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="rep-total"
+                id="pushText">
+                0 / 40 reps
+            </div>
+
+        </div>
+
+
+        <!-- ABS -->
+
+        <div class="exercise-card">
+
+            <div class="exercise-icon">
+                🔥
+            </div>
+
+            <div class="exercise-name">
+                Abs
+            </div>
+
+            <div class="exercise-sub">
+                Core
+            </div>
+
+
+            <div class="rep-inputs">
+
+                <div class="rep-input">
+
+                    <label>
+                        Daily Target
+                    </label>
+
+                    <input
+                        id="absTarget"
+                        type="number"
+                        min="0"
+                        placeholder="30">
+
+                </div>
+
+
+                <div class="rep-input">
+
+                    <label>
+                        Completed
+                    </label>
+
+                    <input
+                        id="absCompleted"
+                        type="number"
+                        min="0"
+                        placeholder="0">
+
+                </div>
+
+            </div>
+
+
+            <div class="exercise-progress">
+
+                <div class="exercise-progress-top">
+
+                    <span>
+                        Progress
+                    </span>
+
+                    <span id="absPercent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="exercise-bar">
+
+                    <div
+                        class="exercise-fill"
+                        id="absProgress">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="rep-total"
+                id="absText">
+                0 / 30 reps
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- PERSONAL STATS -->
+
+<section class="stats">
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Days Complete
+        </div>
+
+        <div
+            class="stat-value"
+            id="daysComplete">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Current Streak
+        </div>
+
+        <div
+            class="stat-value"
+            id="streak">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Current Weight
+        </div>
+
+        <div
+            class="stat-value"
+            id="currentWeight">
+            —
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Overall Progress
+        </div>
+
+        <div
+            class="stat-value"
+            id="overallProgress">
+            0%
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Total Squats
+        </div>
+
+        <div
+            class="stat-value"
+            id="totalSquats">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            Total Push-ups
+        </div>
+
+        <div
+            class="stat-value"
+            id="totalPushups">
+            0
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- ==================================================
+     PERSON COMPARISON
+================================================== -->
+
+<section class="comparison-section">
+
+
+    <div class="comparison-header">
+
+        <div class="section-title">
+            HEAD TO HEAD
+        </div>
+
+        <div class="comparison-title">
+            TWO PEOPLE.<br>
+            <span>ONE 90 DAY ARC.</span>
+        </div>
+
+        <div class="comparison-subtitle">
+            Track both people separately and compare
+            their complete 90-day progress.
+        </div>
+
+    </div>
+
+
+    <!-- NAMES -->
+
+    <div class="name-inputs">
+
+
+        <div class="name-box">
+
+            <label>
+                Person 1 Name
+            </label>
+
+            <input
+                id="person1Name"
+                type="text"
+                placeholder="Person 1"
+                oninput="saveNames()">
+
+        </div>
+
+
+        <div class="name-box">
+
+            <label>
+                Person 2 Name
+            </label>
+
+            <input
+                id="person2Name"
+                type="text"
+                placeholder="Person 2"
+                oninput="saveNames()">
+
+        </div>
+
+
+    </div>
+
+
+    <!-- COMPARISON TABLE -->
+
+    <div class="comparison-card">
+
+        <div class="comparison-grid">
+
+
+            <!-- HEADERS -->
+
+            <div class="comparison-cell">
+
+                <div class="comparison-label">
+                    Metric
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="person1-header"
+                    id="comparePerson1Name">
+                    Person 1
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="person2-header"
+                    id="comparePerson2Name">
+                    Person 2
+                </div>
+
+            </div>
+
+
+            <!-- WEIGHT -->
+
+            <div class="comparison-cell">
+
+                <div class="metric-name">
+                    Weight
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareWeight1">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareWeight2">
+                    —
+                </div>
+
+            </div>
+
+
+            <!-- WAIST -->
+
+            <div class="comparison-cell">
+
+                <div class="metric-name">
+                    Waist
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareWaist1">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareWaist2">
+                    —
+                </div>
+
+            </div>
+
+
+            <!-- SQUATS -->
+
+            <div class="comparison-cell">
+
+                <div class="metric-name">
+                    Total Squats
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareSquats1">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareSquats2">
+                    0
+                </div>
+
+            </div>
+
+
+            <!-- PUSHUPS -->
+
+            <div class="comparison-cell">
+
+                <div class="metric-name">
+                    Total Push-ups
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="comparePush1">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="comparePush2">
+                    0
+                </div>
+
+            </div>
+
+
+            <!-- ABS -->
+
+            <div class="comparison-cell">
+
+                <div class="metric-name">
+                    Total Abs
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareAbs1">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareAbs2">
+                    0
+                </div>
+
+            </div>
+
+
+            <!-- DAYS -->
+
+            <div class="comparison-cell">
+
+                <div class="metric-name">
+                    Completed Days
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareDays1">
+                    0 / 90
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareDays2">
+                    0 / 90
+                </div>
+
+            </div>
+
+
+            <!-- STREAK -->
+
+            <div class="comparison-cell">
+
+                <div class="metric-name">
+                    Current Streak
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareStreak1">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareStreak2">
+                    0
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <div class="comparison-cell">
+
+                <div class="metric-name">
+                    Overall Progress
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareProgress1">
+                    0%
+                </div>
+
+            </div>
+
+
+            <div class="comparison-cell">
+
+                <div
+                    class="comparison-value"
+                    id="compareProgress2">
+                    0%
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- PROGRESS BARS -->
+
+    <div class="compare-progress">
+
+
+        <div class="compare-progress-card">
+
+            <div class="compare-progress-name">
+
+                <strong id="progressName1">
+                    Person 1
+                </strong>
+
+                <strong id="progressValue1">
+                    0%
+                </strong>
+
+            </div>
+
+            <div class="compare-progress-bar">
+
+                <div
+                    class="compare-progress-fill"
+                    id="progressBar1">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="compare-progress-card">
+
+            <div class="compare-progress-name">
+
+                <strong id="progressName2">
+                    Person 2
+                </strong>
+
+                <strong id="progressValue2">
+                    0%
+                </strong>
+
+            </div>
+
+            <div class="compare-progress-bar">
+
+                <div
+                    class="compare-progress-fill person2-fill"
+                    id="progressBar2">
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- PHASES -->
+
+<section class="overview">
+
+    <div class="section-title">
+        The 90 Day Arc
+    </div>
+
+    <div class="overview-grid">
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                01 — 30
+            </div>
+
+            <h3>
+                BUILD THE HABIT
+            </h3>
+
+            <p>
+                Build your training, nutrition,
+                sleep and daily movement routine.
+            </p>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                31 — 60
+            </div>
+
+            <h3>
+                BUILD THE DISCIPLINE
+            </h3>
+
+            <p>
+                Stay consistent when motivation
+                disappears and progressively improve.
+            </p>
+
+        </div>
+
+
+        <div class="phase">
+
+            <div class="phase-number">
+                61 — 90
+            </div>
+
+            <h3>
+                FINISH THE ARC
+            </h3>
+
+            <p>
+                Track everything and finish all
+                90 days without quitting.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<script>
+
+/* ==================================================
+   SETTINGS
+================================================== */
+
+const TOTAL_DAYS = 90;
+
+let currentDay = 1;
+
+let currentPerson = 1;
+
+
+/* ==================================================
+   DEFAULT DATA
+================================================== */
+
+function createEmptyPerson(){
+
+    const person = {
+
+        startDate:new Date().toISOString(),
+
+        days:{}
+
+    };
+
+    for(
+        let i=1;
+        i<=TOTAL_DAYS;
+        i++
+    ){
+
+        person.days[i] = {
+
+            habits:{
+
+                workout:false,
+                steps:false,
+                protein:false,
+                calories:false,
+                water:false,
+                sleep:false,
+                sugar:false
+
+            },
+
+            weight:"",
+            waist:"",
+            steps:"",
+            water:"",
+
+            exercises:{
+
+                squats:{
+                    target:50,
+                    completed:0
+                },
+
+                pushups:{
+                    target:40,
+                    completed:0
+                },
+
+                abs:{
+                    target:30,
+                    completed:0
+                }
+
+            }
+
+        };
+
+    }
+
+    return person;
+
+}
+
+
+/* ==================================================
+   LOAD MAIN DATABASE
+================================================== */
+
+let database =
+    JSON.parse(
+        localStorage.getItem(
+            "winterArcPeople"
+        )
+    );
+
+
+if(!database){
+
+    database = {
+
+        person1:createEmptyPerson(),
+
+        person2:createEmptyPerson(),
+
+        names:{
+            person1:"Person 1",
+            person2:"Person 2"
+        }
+
+    };
+
+    saveDatabase();
+
+}
+
+
+/* ==================================================
+   SAVE DATABASE
+================================================== */
+
+function saveDatabase(){
+
+    localStorage.setItem(
+        "winterArcPeople",
+        JSON.stringify(database)
+    );
+
+}
+
+
+/* ==================================================
+   CURRENT PERSON
+================================================== */
+
+function getPerson(){
+
+    return currentPerson===1
+        ?database.person1
+        :database.person2;
+
+}
+
+
+/* ==================================================
+   SWITCH PERSON
+================================================== */
+
+function switchPerson(person){
+
+    currentPerson=person;
+
+    document
+        .getElementById("person1Btn")
+        .classList.toggle(
+            "active",
+            person===1
+        );
+
+    document
+        .getElementById("person2Btn")
+        .classList.toggle(
+            "active",
+            person===2
+        );
+
+    loadDay();
+
+    updateStats();
+
+    updateComparison();
+
+}
+
+
+/* ==================================================
+   LOAD DAY
+================================================== */
+
+function loadDay(){
+
+    const person=getPerson();
+
+    const day=person.days[currentDay];
+
+
+    document.getElementById(
+        "dayTitle"
+    ).textContent=
+        "DAY "+currentDay;
+
+
+    const start=
+        new Date(person.startDate);
+
+    const date=
+        new Date(start);
+
+    date.setDate(
+        start.getDate()+
+        currentDay-
+        1
+    );
+
+
+    document.getElementById(
+        "dateDisplay"
+    ).textContent=
+        date.toLocaleDateString(
+            "en-IN",
+            {
+                day:"numeric",
+                month:"short",
+                year:"numeric"
+            }
+        );
+
+
+    /* HABITS */
+
+    document
+        .querySelectorAll(".habit")
+        .forEach(habit=>{
+
+            const name=
+                habit.dataset.habit;
+
+            habit.classList.toggle(
+                "done",
+                day.habits[name]
+            );
+
+        });
+
+
+    /* BODY */
+
+    document.getElementById(
+        "weight"
+    ).value=day.weight;
+
+    document.getElementById(
+        "waist"
+    ).value=day.waist;
+
+    document.getElementById(
+        "stepsInput"
+    ).value=day.steps;
+
+    document.getElementById(
+        "waterInput"
+    ).value=day.water;
+
+
+    /* EXERCISES */
+
+    document.getElementById(
+        "squatTarget"
+    ).value=
+        day.exercises.squats.target;
+
+    document.getElementById(
+        "squatCompleted"
+    ).value=
+        day.exercises.squats.completed;
+
+
+    document.getElementById(
+        "pushTarget"
+    ).value=
+        day.exercises.pushups.target;
+
+    document.getElementById(
+        "pushCompleted"
+    ).value=
+        day.exercises.pushups.completed;
+
+
+    document.getElementById(
+        "absTarget"
+    ).value=
+        day.exercises.abs.target;
+
+    document.getElementById(
+        "absCompleted"
+    ).value=
+        day.exercises.abs.completed;
+
+
+    updateDailyProgress();
+
+    updateExerciseProgress();
+
+    updateDayButtons();
+
+}
+
+
+/* ==================================================
+   DAY BUTTONS
+================================================== */
+
+function createDayButtons(){
+
+    const grid=
+        document.getElementById(
+            "dayGrid"
+        );
+
+    grid.innerHTML="";
+
+
+    for(
+        let i=1;
+        i<=TOTAL_DAYS;
+        i++
+    ){
+
+        const button=
+            document.createElement(
+                "button"
+            );
+
+        button.className="day";
+
+        button.textContent=i;
+
+        button.onclick=()=>{
+
+            currentDay=i;
+
+            loadDay();
+
+        };
+
+        grid.appendChild(button);
+
+    }
+
+}
+
+
+/* ==================================================
+   DAY COMPLETE
+================================================== */
+
+function isDayComplete(
+    person,
+    dayNumber
+){
+
+    const day=
+        person.days[dayNumber];
+
+
+    const habitsComplete=
+        Object.values(day.habits)
+        .every(Boolean);
+
+
+    const exercisesComplete=
+
+        day.exercises.squats.completed
+        >=
+        day.exercises.squats.target
+
+        &&
+
+        day.exercises.pushups.completed
+        >=
+        day.exercises.pushups.target
+
+        &&
+
+        day.exercises.abs.completed
+        >=
+        day.exercises.abs.target;
+
+
+    return habitsComplete &&
+           exercisesComplete;
+
+}
+
+
+/* ==================================================
+   DAY BUTTON COLORS
+================================================== */
+
+function updateDayButtons(){
+
+    const person=getPerson();
+
+
+    document
+        .querySelectorAll(".day")
+        .forEach(
+            (button,index)=>{
+
+                const day=index+1;
+
+                button.classList.remove(
+                    "active",
+                    "completed"
+                );
+
+
+                if(day===currentDay){
+
+                    button.classList.add(
+                        "active"
+                    );
+
+                }
+
+
+                if(
+                    isDayComplete(
+                        person,
+                        day
+                    )
+                ){
+
+                    button.classList.add(
+                        "completed"
+                    );
+
+                }
+
+            }
+        );
+
+}
+
+
+/* ==================================================
+   HABIT CLICK
+================================================== */
+
+document
+    .querySelectorAll(".habit")
+    .forEach(habit=>{
+
+        habit.addEventListener(
+            "click",
+            ()=>{
+
+                const person=
+                    getPerson();
+
+                const name=
+                    habit.dataset.habit;
+
+
+                person.days[currentDay]
+                    .habits[name]=
+                    !person.days[currentDay]
+                    .habits[name];
+
+
+                saveDatabase();
+
+                loadDay();
+
+                updateStats();
+
+                updateComparison();
+
+            }
+        );
+
+    });
+
+
+/* ==================================================
+   DAILY PROGRESS
+================================================== */
+
+function updateDailyProgress(){
+
+    const person=getPerson();
+
+    const day=
+        person.days[currentDay];
+
+
+    const habits=
+        Object.values(
+            day.habits
+        );
+
+
+    const habitScore=
+        habits.filter(Boolean)
+        .length;
+
+
+    let exerciseScore=0;
+
+
+    if(
+        day.exercises.squats.target>0
+    ){
+
+        exerciseScore+=Math.min(
+            day.exercises.squats.completed/
+            day.exercises.squats.target,
+            1
+        );
+
+    }
+
+
+    if(
+        day.exercises.pushups.target>0
+    ){
+
+        exerciseScore+=Math.min(
+            day.exercises.pushups.completed/
+            day.exercises.pushups.target,
+            1
+        );
+
+    }
+
+
+    if(
+        day.exercises.abs.target>0
+    ){
+
+        exerciseScore+=Math.min(
+            day.exercises.abs.completed/
+            day.exercises.abs.target,
+            1
+        );
+
+    }
+
+
+    const total=
+        habits.length+3;
+
+
+    const completed=
+        habitScore+
+        exerciseScore;
+
+
+    const percent=
+        Math.round(
+            completed/
+            total*
+            100
+        );
+
+
+    document.getElementById(
+        "dailyPercent"
+    ).textContent=
+        percent+"%";
+
+
+    document.getElementById(
+        "dailyProgress"
+    ).style.width=
+        percent+"%";
+
+}
+
+
+/* ==================================================
+   EXERCISE PROGRESS
+================================================== */
+
+function updateExerciseProgress(){
+
+    const person=getPerson();
+
+    const exercises=
+        person.days[currentDay]
+        .exercises;
+
+
+    updateExercise(
+        exercises.squats,
+        "squat"
+    );
+
+    updateExercise(
+        exercises.pushups,
+        "push"
+    );
+
+    updateExercise(
+        exercises.abs,
+        "abs"
+    );
+
+}
+
+
+function updateExercise(
+    exercise,
+    prefix
+){
+
+    let percent=0;
+
+
+    if(exercise.target>0){
+
+        percent=
+            Math.min(
+                Math.round(
+                    exercise.completed/
+                    exercise.target*
+                    100
+                ),
+                100
+            );
+
+    }
+
+
+    document.getElementById(
+        prefix+"Percent"
+    ).textContent=
+        percent+"%";
+
+
+    document.getElementById(
+        prefix+"Progress"
+    ).style.width=
+        percent+"%";
+
+
+    document.getElementById(
+        prefix+"Text"
+    ).textContent=
+        exercise.completed+
+        " / "+
+        exercise.target+
+        " reps";
+
+}
+
+
+/* ==================================================
+   EXERCISE INPUTS
+================================================== */
+
+const exerciseMap={
+
+    squatTarget:[
+        "squats",
+        "target"
+    ],
+
+    squatCompleted:[
+        "squats",
+        "completed"
+    ],
+
+    pushTarget:[
+        "pushups",
+        "target"
+    ],
+
+    pushCompleted:[
+        "pushups",
+        "completed"
+    ],
+
+    absTarget:[
+        "abs",
+        "target"
+    ],
+
+    absCompleted:[
+        "abs",
+        "completed"
+    ]
+
+};
+
+
+Object.keys(exerciseMap)
+.forEach(id=>{
+
+    document
+        .getElementById(id)
+        .addEventListener(
+            "input",
+            function(){
+
+                const person=
+                    getPerson();
+
+                const [
+                    exercise,
+                    property
+                ]=
+                    exerciseMap[id];
+
+
+                let value=
+                    parseInt(
+                        this.value
+                    )||0;
+
+
+                if(value<0)
+                    value=0;
+
+
+                person.days[currentDay]
+                    .exercises
+                    [exercise]
+                    [property]=
+                    value;
+
+
+                saveDatabase();
+
+                updateExerciseProgress();
+
+                updateDailyProgress();
+
+                updateStats();
+
+                updateComparison();
+
+            }
+        );
+
+});
+
+
+/* ==================================================
+   BODY INPUTS
+================================================== */
+
+const bodyMap={
+
+    weight:"weight",
+
+    waist:"waist",
+
+    stepsInput:"steps",
+
+    waterInput:"water"
+
+};
+
+
+Object.keys(bodyMap)
+.forEach(id=>{
+
+    document
+        .getElementById(id)
+        .addEventListener(
+            "input",
+            function(){
+
+                const person=
+                    getPerson();
+
+
+                person.days[currentDay]
+                    [bodyMap[id]]=
+                    this.value;
+
+
+                saveDatabase();
+
+                updateStats();
+
+                updateComparison();
+
+            }
+        );
+
+});
+
+
+/* ==================================================
+   STATS
+================================================== */
+
+function calculatePersonStats(person){
+
+    let completedDays=0;
+
+    let lastWeight="";
+
+    let lastWaist="";
+
+    let totalSquats=0;
+
+    let totalPushups=0;
+
+    let totalAbs=0;
+
+
+    for(
+        let i=1;
+        i<=TOTAL_DAYS;
+        i++
+    ){
+
+        const day=
+            person.days[i];
+
+
+        if(
+            isDayComplete(
+                person,
+                i
+            )
+        ){
+
+            completedDays++;
+
+        }
+
+
+        if(day.weight!==""){
+
+            lastWeight=
+                day.weight;
+
+        }
+
+
+        if(day.waist!==""){
+
+            lastWaist=
+                day.waist;
+
+        }
+
+
+        totalSquats+=
+            Number(
+                day.exercises
+                .squats
+                .completed
+            )||0;
+
+
+        totalPushups+=
+            Number(
+                day.exercises
+                .pushups
+                .completed
+            )||0;
+
+
+        totalAbs+=
+            Number(
+                day.exercises
+                .abs
+                .completed
+            )||0;
+
+    }
+
+
+    let streak=0;
+
+
+    for(
+        let i=TOTAL_DAYS;
+        i>=1;
+        i--
+    ){
+
+        if(
+            isDayComplete(
+                person,
+                i
+            )
+        ){
+
+            streak++;
+
+        }else{
+
+            break;
+
+        }
+
+    }
+
+
+    return {
+
+        completedDays,
+
+        weight:lastWeight,
+
+        waist:lastWaist,
+
+        totalSquats,
+
+        totalPushups,
+
+        totalAbs,
+
+        streak,
+
+        progress:
+            Math.round(
+                completedDays/
+                TOTAL_DAYS*
+                100
+            )
+
+    };
+
+}
+
+
+/* ==================================================
+   PERSONAL STATS
+================================================== */
+
+function updateStats(){
+
+    const person=getPerson();
+
+    const stats=
+        calculatePersonStats(
+            person
+        );
+
+
+    document.getElementById(
+        "daysComplete"
+    ).textContent=
+        stats.completedDays;
+
+
+    document.getElementById(
+        "streak"
+    ).textContent=
+        stats.streak;
+
+
+    document.getElementById(
+        "currentWeight"
+    ).textContent=
+        stats.weight
+        ?stats.weight+" kg"
+        :"—";
+
+
+    document.getElementById(
+        "overallProgress"
+    ).textContent=
+        stats.progress+"%";
+
+
+    document.getElementById(
+        "totalSquats"
+    ).textContent=
+        stats.totalSquats
+        .toLocaleString();
+
+
+    document.getElementById(
+        "totalPushups"
+    ).textContent=
+        stats.totalPushups
+        .toLocaleString();
+
+
+    updateDayButtons();
+
+}
+
+
+/* ==================================================
+   NAMES
+================================================== */
+
+function saveNames(){
+
+    const name1=
+        document.getElementById(
+            "person1Name"
+        ).value.trim();
+
+
+    const name2=
+        document.getElementById(
+            "person2Name"
+        ).value.trim();
+
+
+    database.names.person1=
+        name1||"Person 1";
+
+
+    database.names.person2=
+        name2||"Person 2";
+
+
+    saveDatabase();
+
+    updateComparison();
+
+}
+
+
+/* ==================================================
+   COMPARISON
+================================================== */
+
+function updateComparison(){
+
+    const stats1=
+        calculatePersonStats(
+            database.person1
+        );
+
+
+    const stats2=
+        calculatePersonStats(
+            database.person2
+        );
+
+
+    const name1=
+        database.names.person1||
+        "Person 1";
+
+
+    const name2=
+        database.names.person2||
+        "Person 2";
+
+
+    document.getElementById(
+        "person1Name"
+    ).value=
+        name1==="Person 1"
+        ?""
+        :name1;
+
+
+    document.getElementById(
+        "person2Name"
+    ).value=
+        name2==="Person 2"
+        ?""
+        :name2;
+
+
+    document.getElementById(
+        "comparePerson1Name"
+    ).textContent=
+        name1;
+
+
+    document.getElementById(
+        "comparePerson2Name"
+    ).textContent=
+        name2;
+
+
+    /* WEIGHT */
+
+    document.getElementById(
+        "compareWeight1"
+    ).textContent=
+        stats1.weight
+        ?stats1.weight+" kg"
+        :"—";
+
+
+    document.getElementById(
+        "compareWeight2"
+    ).textContent=
+        stats2.weight
+        ?stats2.weight+" kg"
+        :"—";
+
+
+    /* WAIST */
+
+    document.getElementById(
+        "compareWaist1"
+    ).textContent=
+        stats1.waist
+        ?stats1.waist+" cm"
+        :"—";
+
+
+    document.getElementById(
+        "compareWaist2"
+    ).textContent=
+        stats2.waist
+        ?stats2.waist+" cm"
+        :"—";
+
+
+    /* SQUATS */
+
+    document.getElementById(
+        "compareSquats1"
+    ).textContent=
+        stats1.totalSquats
+        .toLocaleString();
+
+
+    document.getElementById(
+        "compareSquats2"
+    ).textContent=
+        stats2.totalSquats
+        .toLocaleString();
+
+
+    /* PUSHUPS */
+
+    document.getElementById(
+        "comparePush1"
+    ).textContent=
+        stats1.totalPushups
+        .toLocaleString();
+
+
+    document.getElementById(
+        "comparePush2"
+    ).textContent=
+        stats2.totalPushups
+        .toLocaleString();
+
+
+    /* ABS */
+
+    document.getElementById(
+        "compareAbs1"
+    ).textContent=
+        stats1.totalAbs
+        .toLocaleString();
+
+
+    document.getElementById(
+        "compareAbs2"
+    ).textContent=
+        stats2.totalAbs
+        .toLocaleString();
+
+
+    /* DAYS */
+
+    document.getElementById(
+        "compareDays1"
+    ).textContent=
+        stats1.completedDays+
+        " / 90";
+
+
+    document.getElementById(
+        "compareDays2"
+    ).textContent=
+        stats2.completedDays+
+        " / 90";
+
+
+    /* STREAK */
+
+    document.getElementById(
+        "compareStreak1"
+    ).textContent=
+        stats1.streak;
+
+
+    document.getElementById(
+        "compareStreak2"
+    ).textContent=
+        stats2.streak;
+
+
+    /* PROGRESS */
+
+    document.getElementById(
+        "compareProgress1"
+    ).textContent=
+        stats1.progress+"%";
+
+
+    document.getElementById(
+        "compareProgress2"
+    ).textContent=
+        stats2.progress+"%";
+
+
+    /* BARS */
+
+    document.getElementById(
+        "progressName1"
+    ).textContent=
+        name1;
+
+
+    document.getElementById(
+        "progressName2"
+    ).textContent=
+        name2;
+
+
+    document.getElementById(
+        "progressValue1"
+    ).textContent=
+        stats1.progress+"%";
+
+
+    document.getElementById(
+        "progressValue2"
+    ).textContent=
+        stats2.progress+"%";
+
+
+    document.getElementById(
+        "progressBar1"
+    ).style.width=
+        stats1.progress+"%";
+
+
+    document.getElementById(
+        "progressBar2"
+    ).style.width=
+        stats2.progress+"%";
+
+}
+
+
+/* ==================================================
+   RESET
+================================================== */
+
+function resetAll(){
+
+    const confirmed=
+        confirm(
+            "Delete ALL data for BOTH people?"
+        );
+
+
+    if(!confirmed)
+        return;
+
+
+    localStorage.removeItem(
+        "winterArcPeople"
+    );
+
+
+    location.reload();
+
+}
+
+
+/* ==================================================
+   START
+================================================== */
+
+document.getElementById(
+    "person1Name"
+).value=
+    database.names.person1==="Person 1"
+    ?""
+    :database.names.person1;
+
+
+document.getElementById(
+    "person2Name"
+).value=
+    database.names.person2==="Person 2"
+    ?""
+    :database.names.person2;
+
+
+createDayButtons();
+
+loadDay();
+
+updateStats();
+
+updateComparison();
+
+</script>
+
+</body>
+</html>
